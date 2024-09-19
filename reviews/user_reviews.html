@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>あなたのレビュー一覧</title>
+</head>
+<body>
+    <h1>あなたのレビュー一覧</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>店舗名</th>
+                <th>評価</th>
+                <th>コメント</th>
+                <th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="review : ${reviews}">
+                <td th:text="${review.storeId}"></td>
+                <td th:text="${review.star}"></td>
+                <td th:text="${review.comment}"></td>
+                <td>
+                    <a th:href="@{/review/edit/{id}(id=${review.id})}" class="btn btn-primary">編集</a>
+                    <form th:action="@{/review/delete/{id}(id=${review.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">削除</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
